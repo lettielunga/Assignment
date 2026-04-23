@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Contact Form</title>
+    <style>
+        body { font-family: Arial; padding: 20px; background: #f9f9f9; }
+        form { max-width: 400px; margin: 0 auto; background: white; padding: 20px; border-radius: 8px; }
+        label { display: block; margin-top: 15px; font-weight: bold; }
+        input, textarea { width: 100%; padding: 8px; margin-top: 5px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px; }
+        button { margin-top: 20px; padding: 10px 20px; background: #d32f2f; color: white; border: none; border-radius: 4px; cursor: pointer; }
+        button:hover { background: #b71c1c; }
+    </style>
+</head>
+<body>
+    <form>
+        <h2>Contact Us</h2>
+        
+        <!-- 1. Full Name -->
+        <label for="name">Full Name</label>
+        <input type="text" id="name" name="name" placeholder="e.g. Thabo Mokoena" required>
+        
+        <!-- 2. Email Address -->
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" placeholder="e.g. thabo@email.com" required>
+        
+        <!-- 3. Phone Number -->
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" name="phone" placeholder="e.g. 0712345678" pattern="[0-9]{10,}" minlength="10" required>
+        
+        <!-- 4. Message -->
+        <label for="message">Message</label>
+        <textarea id="message" name="message" rows="4" placeholder="Type your message here..." required></textarea>
+        
+        <!-- 5. Send Button -->
+        <button type="submit">Send</button>
+    </form>
+</body>
+</html>
