@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JS Fundamentals Assignment</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 50px;
+      background: #f5f5f5;
+      text-align: center;
+    }
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      max-width: 500px;
+      margin: 0 auto;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    input {
+      padding: 10px;
+      margin: 10px;
+      width: 80%;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    button {
+      padding: 12px 30px;
+      background: #ff6600;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-top: 10px;
+    }
+    button:hover {
+      background: #e65c00;
+    }
+    #output {
+      margin-top: 20px;
+      font-size: 18px;
+      text-align: left;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>JS Fundamentals</h1>
+    
+    <input type="text" id="nameInput" placeholder="Enter your name">
+    <input type="number" id="ageInput" placeholder="Enter your age">
+    
+    <button onclick="runAll()">Run Code</button>
+    
+    <div id="output"></div>
+  </div>
+
+  <script>
+    // Function that displays a greeting message
+    function greetUser(name, age) {
+      let message = "";
+      
+      // 1. Variable storing user's name - done via input
+      // 2. Condition: check if user is above 18
+      if (age >= 18) {
+        message += `Hello ${name}! You are an adult.<br><br>`;
+      } else {
+        message += `Hello ${name}! You are under 18.<br><br>`;
+      }
+      
+      // 3. Loop that counts from 1 to 5
+      message += "Counting from 1 to 5:<br>";
+      for (let i = 1; i <= 5; i++) {
+        message += `Number: ${i}<br>`;
+      }
+      
+      return message;
+    }
+    
+    // 4. Button triggers the function when clicked
+    function runAll() {
+      let name = document.getElementById("nameInput").value;
+      let age = document.getElementById("ageInput").value;
+      
+      if (name === "" || age === "") {
+        document.getElementById("output").innerHTML = "Please fill both fields!";
+        return;
+      }
+      
+      let result = greetUser(name, age);
+      document.getElementById("output").innerHTML = result;
+    }
+  </script>
+</body>
+</html>

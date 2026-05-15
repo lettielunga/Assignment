@@ -1,0 +1,92 @@
+Part 2
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Fetch API Assignment</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 50px;
+      background: #f5f5f5;
+      text-align: center;
+    }
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      max-width: 600px;
+      margin: 0 auto;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    button {
+      padding: 12px 30px;
+      background: #ff6600;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    button:hover {
+      background: #e65c00;
+    }
+    #dataOutput {
+      margin-top: 30px;
+      text-align: left;
+    }
+    .quote {
+      font-size: 20px;
+      font-style: italic;
+      margin-bottom: 10px;
+    }
+    .author {
+      font-weight: bold;
+      color: #555;
+    }
+    .error {
+      color: red;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Random Quote Generator</h1>
+    <button id="loadBtn">Load Data</button>
+    <div id="dataOutput"></div>
+  </div>
+
+  <script>
+    const btn = document.getElementById("loadBtn");
+    const output = document.getElementById("dataOutput");
+
+    // Add "Load Data" button that fetches data when clicked
+    btn.addEventListener("click", async function() {
+      try {
+        output.innerHTML = "Loading...";
+        
+        // Fetch data from API
+        let response = await fetch("https://api.quotable.io/random");
+        
+        // Show message if something goes wrong
+        if (!response.ok) {
+          throw new Error("Failed to fetch data");
+        }
+        
+        let data = await response.json();
+        
+        // Display the data dynamically on the page
+        output.innerHTML = `
+          <div class="quote">"${data.content}"</div>
+          <div class="author">- ${data.author}</div>
+        `;
+        
+      } catch (error) {
+        output.innerHTML = `<span class="error">Oops! Something went wrong. Please try again.</span>`;
+        console.log(error);
+      }
+    });
+  </script>
+</body>
+</html>

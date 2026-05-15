@@ -1,0 +1,130 @@
+Part 3
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Combined JS Assignment</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 30px;
+      background: #f5f5f5;
+    }
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      max-width: 700px;
+      margin: 0 auto 30px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      text-align: center;
+      color: #333;
+    }
+    input, button {
+      padding: 10px;
+      margin: 10px 0;
+      width: 100%;
+      box-sizing: border-box;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    button {
+      background: #ff6600;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    button:hover {
+      background: #e65c00;
+    }
+    #output, #apiOutput {
+      margin-top: 20px;
+      padding: 15px;
+      background: #f9f9f9;
+      border-radius: 5px;
+      line-height: 1.6;
+    }
+    .quote {
+      font-size: 18px;
+      font-style: italic;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Section 1: JS Fundamentals from Slide 24 -->
+  <div class="container">
+    <h2>Part 1: JS Fundamentals</h2>
+    
+    <input type="text" id="nameInput" placeholder="Enter your name">
+    <input type="number" id="ageInput" placeholder="Enter your age">
+    <button onclick="runBasics()">Run Basics</button>
+    
+    <div id="output"></div>
+  </div>
+
+  <!-- Section 2: Fetch API from Slide 31 -->
+  <div class="container">
+    <h2>Part 2: Fetch API Data</h2>
+    <button id="loadBtn">Load Random Quote</button>
+    <div id="apiOutput"></div>
+  </div>
+
+  <script>
+    // Part 1: JS Fundamentals
+    function runBasics() {
+      let name = document.getElementById("nameInput").value;
+      let age = document.getElementById("ageInput").value;
+      let message = "";
+      
+      if (name === "" || age === "") {
+        document.getElementById("output").innerHTML = "Please fill both fields!";
+        return;
+      }
+      
+      if (age >= 18) {
+        message += `Hello ${name}! You are an adult.<br><br>`;
+      } else {
+        message += `Hello ${name}! You are under 18.<br><br>`;
+      }
+      
+      message += "Counting from 1 to 5:<br>";
+      for (let i = 1; i <= 5; i++) {
+        message += `Number: ${i}<br>`;
+      }
+      
+      document.getElementById("output").innerHTML = message;
+    }
+
+    // Part 2: Fetch API
+    const btn = document.getElementById("loadBtn");
+    const apiOutput = document.getElementById("apiOutput");
+
+    btn.addEventListener("click", async function() {
+      try {
+        apiOutput.innerHTML = "Loading...";
+        let response = await fetch("https://api.quotable.io/random");
+        
+        if (!response.ok) {
+          throw new Error("Failed to fetch data");
+        }
+        
+        let data = await response.json();
+        apiOutput.innerHTML = `
+          <div class="quote">"${data.content}"</div>
+          <div>- ${data.author}</div>
+        `;
+        
+      } catch (error) {
+        apiOutput.innerHTML = `<span class="error">Error: Could not load data</span>`;
+      }
+    });
+  </script>
+</body>
+</html>
